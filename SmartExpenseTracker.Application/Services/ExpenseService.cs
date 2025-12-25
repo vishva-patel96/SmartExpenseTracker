@@ -2,6 +2,7 @@
 using SmartExpenseTracker.Domain.Interfaces;
 namespace SmartExpenseTracker.Application.Services
 {
+    //Implementation of IExpenseRepository interface
     public class ExpenseService :IExpenseRepository
     {
         //dependency injection of repository
@@ -22,6 +23,12 @@ namespace SmartExpenseTracker.Application.Services
         public async Task<List<Expense>> GetAllExpensesAsync()
         {
             return await _expenseRepository.GetAllExpensesAsync();
+        }
+        //added Linq query to get monthly total expenses
+        public decimal GetMonthlyTotal(IEnumerable<Expense> expense, int month)
+        {
+            return expense.Where(x => x.Date.Month == month)
+                           .Sum(x => x.Amount);
         }
     }
 }
