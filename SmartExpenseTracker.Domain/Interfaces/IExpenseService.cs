@@ -5,14 +5,11 @@ using System.Text;
 
 namespace SmartExpenseTracker.Domain.Interfaces
 {
-    public interface IExpenseRepository
+    public interface IExpenseService
     {
-        //async method to add a new expense to data store
         Task AddAsync(Expense expense);
-        //async method to retive all expense from data store, and return as a list
         Task UpdateAsync(Expense expense);
         Task DeleteAsync(int expenseId);
-        Task<Expense?> GetByIdAsync(int expenseId);
-        Task<List<Expense>> GetAllExpensesAsync();
+        Task<List<Expense>> GetAllAsync();
     }
 }

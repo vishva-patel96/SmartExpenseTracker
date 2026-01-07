@@ -23,6 +23,26 @@ namespace SmartExpenseTracker.Infrastructure.Repositories
             await _context.Expenses.AddAsync(expense);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateAsync(Expense expense)
+        {
+            _context.Expenses.Update(expense);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task DeleteAsync(int expenseId)
+        {
+            var expense = await _context.Expenses.FindAsync(expenseId);
+            if (expense == null)
+                throw new Exception("Expense not found");
+
+            _context.Expenses.Remove(expense);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<Expense?> GetByIdAsync(int expenseId)
+        {
+            return await _context.Expenses.FindAsync(expenseId);
+        }
         public async Task<List<Expense>> GetAllExpensesAsync()
         {
             //Retrieve all expenses from the DbContext as a list
