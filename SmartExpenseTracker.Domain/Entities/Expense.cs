@@ -12,13 +12,29 @@ namespace SmartExpenseTracker.Domain.Entities
         public decimal Amount { get; private set; }
         public DateTime Date { get; private set; }
         public int CategoryID { get; private set; }
+        public Category category { get; private set; }
+
+        protected Expense() { }
 
         // created immutable obj
         //created constructor
-   
+
         public Expense(decimal amount,DateTime date, int categoryID)
         {
             if(amount <= 0)
+            {
+                throw new Exception("Amount must be greater than zero");
+            }
+            else
+            {
+                Amount = amount;
+                Date = date;
+                CategoryID = categoryID;
+            }
+        }
+        public void Update(decimal amount, DateTime date, int categoryID)
+        {
+            if (amount <= 0)
             {
                 throw new Exception("Amount must be greater than zero");
             }

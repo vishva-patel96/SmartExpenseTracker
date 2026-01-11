@@ -10,10 +10,18 @@ namespace SmartExpenseTracker.Infrastructure
     {
         //constructor to pass options to base DbContext class
         public DbSet<Expense> Expenses { get; set; }
+        public DbSet<Category> Category { get; set; }
         //DbSet for Expense entity
         public ExpenseDbContext(DbContextOptions<ExpenseDbContext> options) : base(options)
         {
 
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Expense>()
+                .HasOne(e => e.category)
+                .WithMany()
+                .HasForeignKey(e => e.CategoryID);
         }
     }
 }
