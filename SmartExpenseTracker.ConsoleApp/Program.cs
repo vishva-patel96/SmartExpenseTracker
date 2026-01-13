@@ -21,3 +21,4 @@ services.AddScoped<IExpenseRepository, ExpenseRepository>();
 services.AddScoped<IExpenseService, ExpenseService>();
 
 var serviceProvider = services.BuildServiceProvider();
+MainMenu.Show(serviceProvider);
