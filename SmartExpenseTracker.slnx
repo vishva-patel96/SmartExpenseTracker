@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="SmartExpenseTracker.API/SmartExpenseTracker.API.csproj" />
   <Project Path="SmartExpenseTracker.Application/SmartExpenseTracker.Application.csproj" />
   <Project Path="SmartExpenseTracker.ConsoleApp/SmartExpenseTracker.ConsoleApp.csproj" />
   <Project Path="SmartExpenseTracker.Domain/SmartExpenseTracker.Domain.csproj" />
