@@ -3,7 +3,6 @@ using SmartExpenseTracker.Application.Services;
 using SmartExpenseTracker.Domain.Interfaces;
 using SmartExpenseTracker.Infrastructure;
 using SmartExpenseTracker.Infrastructure.Repositories;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +19,7 @@ builder.Services.AddDbContext<ExpenseDbContext>(options =>
 builder.Services.AddScoped<IExpenseRepository, ExpenseRepository>();
 builder.Services.AddScoped<IExpenseService, ExpenseService>();
 
-// CORS - Important for React to communicate with API
+// CORS - CRITICAL for React to connect! 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowReactApp", policy =>
