@@ -46,7 +46,10 @@ namespace SmartExpenseTracker.Infrastructure.Repositories
         public async Task<List<Expense>> GetAllExpensesAsync()
         {
             //Retrieve all expenses from the DbContext as a list
-            return await _context.Expenses.AsNoTracking().ToListAsync();
+            return await _context.Expenses
+         .Include(e => e.category)  // 🔑 This loads the Category data
+         .AsNoTracking()
+         .ToListAsync();
         }
     }
 }

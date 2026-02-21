@@ -17,11 +17,23 @@ namespace SmartExpenseTracker.API.Controllers
 
         // GET: api/expenses
         [HttpGet]
-        public async Task<ActionResult<List<Expense>>> GetAll()
+        public async Task<ActionResult<List<ExpenseResponseDto>>> GetAll()
         {
             var expenses = await _expenseService.GetAllAsync();
-            return Ok(expenses);
+
+            // ✅ Map to DTOs with category information
+            var expenseDtos = expenses.Select(e => new ExpenseResponseDto
+            {
+                Id = e.Id,
+                Amount = e.Amount,
+                Date = e.Date,
+                CategoryId = e.CategoryID,
+                CategoryName = e.category?.Name ?? "Unknown"  // ✅ Extract the name
+            }).ToList();
+
+            return Ok(expenseDtos);
         }
+
 
         // POST: api/expenses
         [HttpPost]
@@ -57,5 +69,13 @@ namespace SmartExpenseTracker.API.Controllers
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public int CategoryId { get; set; }
+    }
+    public class ExpenseResponseDto
+    {
+        public int Id { get; set; }
+        public decimal Amount { get; set; }
+        public DateTime Date { get; set; }
+        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }  // Category name included!
     }
 }
